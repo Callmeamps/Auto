@@ -1,13 +1,33 @@
-<!-- YOU CAN DELETE EVERYTHING IN THIS PAGE -->
+<script>
+	let noteData = "Note Data"
+	let titleData = "Title Data"
+	const notes = []
+	let successful = false
+	const toggleSuccess = () => {
+		if (successful) {
+			successful = false
+		} successful = true
+	}
+	const saveNote = (currentNote) => {
+		if (noteData && titleData) {
+			let note = {title: titleData, note: currentNote}
+			console.log(note)
+			notes.push(note)
+			console.log(notes)
+			noteData = ""
+			toggleSuccess()
+		}
+	}
+</script>
 
-<div class="container h-full mx-auto flex justify-center items-center">
-	<div class="space-y-5">
-		<h1 class="h1">Let's get cracking bones!</h1>
-		<p>Start by exploring:</p>
-		<ul>
-			<li><code class="code">/src/routes/+layout.svelte</code> - barebones layout, the CSS import order is critical!</li>
-			<li><code class="code">/src/app.postcss</code> - minimal css to make the page full screen, may not be relevant for your project</li>
-			<li><code class="code">/src/routes/+page.svelte</code> - this page, you can replace the contents</li>
-		</ul>
-	</div>
-</div>
+<h1>{titleData}</h1>
+<div class="breadcrumb">Tag</div>
+<input bind:value={noteData} type="text" class="input" />
+<button on:click={() => saveNote(noteData)} class="btn">save note</button>
+<p>
+	{noteData}
+</p>
+
+{#if (successful)}
+	<div><p>success</p></div>
+{/if}
